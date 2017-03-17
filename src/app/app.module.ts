@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
+import { MaterializeModule } from 'angular2-materialize';
+
 @NgModule({
   declarations: [
     AppComponent
