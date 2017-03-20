@@ -1,0 +1,11 @@
+.logo-sig{
+    display: inline-block !important;
+    font-size: 2rem !important;
+    margin-left: 15px !important;
+    position: absolute;
+}
+
+.menu-sig{
+    margin-left: 15px !important;
+    padding-left: 65px !important;
+}

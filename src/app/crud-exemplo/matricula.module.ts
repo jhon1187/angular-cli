@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
+import { MatriculaComponent } from './pages/matricula.component';
 import { MatriculaService } from './matricula.service';
 import { MatriculaFormComponent } from './pages/matricula-form.component';
 
@@ -16,10 +17,11 @@ import { MatriculaFormComponent } from './pages/matricula-form.component';
     HttpModule
   ],
   declarations: [
+    MatriculaComponent,
     MatriculaFormComponent
   ],
   exports: [
-    MatriculaFormComponent
+    MatriculaComponent
   ],
   providers: [
     MatriculaService

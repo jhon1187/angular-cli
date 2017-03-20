@@ -13,6 +13,11 @@ export class MatriculaService {
 
   constructor(private http: Http) { }
 
+  getMatriculas() {
+    return this.http.get(this.url)
+      .map(res => res.json());
+  }
+
   getMatricula(id) {
     return this.http.get(this.getMatriculaUrl(id))
       .map(res => res.json());
@@ -25,6 +30,11 @@ export class MatriculaService {
 
   updateMatricula(matricula) {
     return this.http.put(this.getMatriculaUrl(matricula.id), JSON.stringify(matricula))
+      .map(res => res.json());
+  }
+
+  deleteMatricula(id) {
+    return this.http.delete(this.getMatriculaUrl(id))
       .map(res => res.json());
   }
 
