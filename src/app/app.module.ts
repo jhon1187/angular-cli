@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 
 import { MaterializeModule } from 'angular2-materialize';
 
@@ -29,7 +30,7 @@ import { MatriculaModule } from "./matricula/matricula.module";
     matriculaRouting,
     routing
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
