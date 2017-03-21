@@ -66,7 +66,7 @@ export class MatriculaFormComponent implements OnInit {
       });
 
       this.matriculaService.getTurmas().subscribe(
-        turmas => this.turmas = turmas,
+        turmas => this.gerarTurmasAutoComplete(turmas),
         response => {
           if (response.status == 404) {
             this.router.navigate(['NotFound']);
@@ -75,6 +75,17 @@ export class MatriculaFormComponent implements OnInit {
 
       this.turmasAutoComplete = {'apple': null, 'google': null};
     });
+  }
+
+  gerarTurmasAutoComplete(turmas) {
+    this.turmas = turmas;
+
+    turmas.forEach(turma => {
+      // {turma.nome : null}
+      // this.turmasAutoComplete.put()
+    });
+    
+    this.turmasAutoComplete
   }
 
   save() {
