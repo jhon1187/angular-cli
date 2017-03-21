@@ -17,9 +17,13 @@ export class MatriculaFormComponent implements OnInit {
 
   form: FormGroup;
   title: string;
+
+  turmasAutoComplete : any = {};
+
   matricula: Matricula = new Matricula();
   aluno : Aluno = new Aluno();
-  turmas : any = {};
+  turma : Turma = new Turma();
+  turmas : Turma[] = [];
 
   constructor(
     formBuilder: FormBuilder,
@@ -28,18 +32,22 @@ export class MatriculaFormComponent implements OnInit {
     private matriculaService: MatriculaService
   ) {
     this.form = formBuilder.group({
-      aluno: ['', [
+      turma: ['', [
         Validators.required,
         Validators.minLength(3)
       ]],
-      email: [],
-      phone: [],
-      address: formBuilder.group({
-        street: ['', Validators.minLength(3)],
-        suite: [],
-        city: ['', Validators.maxLength(30)],
-        zipcode: ['', Validators.pattern('^([0-9]){5}([-])([0-9]){4}$')]
-      })
+      aluno: ['', [
+        Validators.required
+      ]],
+      valorTotal: ['', [
+        Validators.required
+      ]]
+      // , address: formBuilder.group({
+      //   street: ['', Validators.minLength(3)],
+      //   suite: [],
+      //   city: ['', Validators.maxLength(30)],
+      //   zipcode: ['', Validators.pattern('^([0-9]){5}([-])([0-9]){4}$')]
+      // })
     });
   }
 
@@ -57,7 +65,15 @@ export class MatriculaFormComponent implements OnInit {
           }
       });
 
-      this.turmas = {'apple': null, 'google': null};
+      this.matriculaService.getTurmas().subscribe(
+        turmas => this.turmas = turmas,
+        response => {
+          if (response.status == 404) {
+            this.router.navigate(['NotFound']);
+          }
+      });
+
+      this.turmasAutoComplete = {'apple': null, 'google': null};
     });
   }
 

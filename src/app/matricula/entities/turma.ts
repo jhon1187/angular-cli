@@ -1,5 +1,8 @@
+import {FormaPagamento} from './formaPagamento';
+
 export class Turma {
   id: number;
   nome: string;
-  cursoId: number;
+  valor: number;
+  formasPagamento: FormaPagamento[] = [];
 }

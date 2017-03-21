@@ -8,15 +8,15 @@
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">recent_actors</i>
-        <input materialize="autocomplete" id="turma" type="text" name="turma" [materializeParams]="[{'data': turmas}]">
-        <label for="turma" >Turma</label>
+        <input id="turma" name="turma" type="text" class="validate" formControlName="turma" [(ngModel)]="turma.nome" materialize="autocomplete" [materializeParams]="[{'data': turmasAutoComplete }]">
+        <label for="turma" [class.active]="turma.nome">Turma</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">account_circle</i>
-        <input id="aluno" type="text" disabled="disabled" class="validate" [(ngModel)]="aluno.nome" formControlName="aluno" [class.invalid]="form.controls['aluno'].touched && !form.controls['aluno'].valid">
+        <input id="aluno" name="aluno" type="text" disabled="disabled" class="validate" formControlName="aluno" [(ngModel)]="aluno.nome">
         <label for="aluno" [class.active]="aluno.nome">Aluno</label>
       </div>
     </div>

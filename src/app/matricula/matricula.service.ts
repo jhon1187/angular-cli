@@ -10,11 +10,17 @@ export class MatriculaService {
 
   private url: string = "http://jsonplaceholder.typicode.com/sig/matricula";
   private urlAluno: string = "http://demo7540274.mockable.io/aluno";
+  private urlTurmas: string = "http://demo7540274.mockable.io/turmas";
 
   constructor(private http: Http) { }
 
   getAluno(id) {
     return this.http.get(this.urlAluno)
+      .map(res => res.json());
+  }
+
+  getTurmas() {
+    return this.http.get(this.urlTurmas)
       .map(res => res.json());
   }
 
