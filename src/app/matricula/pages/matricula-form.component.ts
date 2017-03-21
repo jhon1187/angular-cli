@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Matricula } from '../entities/matricula';
+import { Aluno } from '../entities/aluno';
+import { Turma } from '../entities/turma';
+
 import { MatriculaService } from '../matricula.service';
 
 @Component({
@@ -15,6 +18,8 @@ export class MatriculaFormComponent implements OnInit {
   form: FormGroup;
   title: string;
   matricula: Matricula = new Matricula();
+  aluno : Aluno = new Aluno();
+  turmas : any = {};
 
   constructor(
     formBuilder: FormBuilder,
@@ -23,7 +28,7 @@ export class MatriculaFormComponent implements OnInit {
     private matriculaService: MatriculaService
   ) {
     this.form = formBuilder.group({
-      name: ['', [
+      aluno: ['', [
         Validators.required,
         Validators.minLength(3)
       ]],
@@ -39,22 +44,20 @@ export class MatriculaFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    var id = this.route.params.subscribe(params => {
-      var id = params['id'];
+    this.route.params.subscribe(params => {
+      var alunoId = params['alunoId'];
 
       this.title = 'Nova Matricula';
-
-      if (!id)
-        return;
-
-      this.matriculaService.getMatricula(id)
-        .subscribe(
-        matricula => this.matricula = matricula,
+ 
+      this.matriculaService.getAluno(alunoId).subscribe(
+        aluno => this.aluno = aluno,
         response => {
           if (response.status == 404) {
             this.router.navigate(['NotFound']);
           }
-        });
+      });
+
+      this.turmas = {'apple': null, 'google': null};
     });
   }
 
@@ -63,6 +66,6 @@ export class MatriculaFormComponent implements OnInit {
    
     result = this.matriculaService.addMatricula(matriculaValue);
 
-    result.subscribe(data => this.router.navigate(['matricula']));
+    result.subscribe(data => this.router.navigate(['matricula/form']));
   }
 }

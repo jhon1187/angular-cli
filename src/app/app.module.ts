@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 
 import { MaterializeModule } from 'angular2-materialize';
+import { MaterializeDirective } from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -29,6 +30,9 @@ import { MatriculaModule } from "./matricula/matricula.module";
     MatriculaModule,
     matriculaRouting,
     routing
+  ],
+  exports: [
+    MaterializeDirective
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

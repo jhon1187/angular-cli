@@ -4,17 +4,17 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class MatriculaService {
 
-  private url: string = "http://jsonplaceholder.typicode.com/matricula";
+  private url: string = "http://jsonplaceholder.typicode.com/sig/matricula";
+  private urlAluno: string = "http://demo7540274.mockable.io/aluno";
 
   constructor(private http: Http) { }
 
-  getMatricula(id) {
-    return this.http.get(this.getMatriculaUrl(id))
+  getAluno(id) {
+    return this.http.get(this.urlAluno)
       .map(res => res.json());
   }
 
@@ -23,12 +23,4 @@ export class MatriculaService {
       .map(res => res.json());
   }
 
-  updateMatricula(matricula) {
-    return this.http.put(this.getMatriculaUrl(matricula.id), JSON.stringify(matricula))
-      .map(res => res.json());
-  }
-
-  private getMatriculaUrl(id) {
-    return this.url + "/" + id;
-  }
 }

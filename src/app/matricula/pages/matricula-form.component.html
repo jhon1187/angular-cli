@@ -1,35 +1,37 @@
-<h5>{{ title }}</h5>
+<div class="title">
+  <h5>{{ title }}</h5>
+</div>
+
 <div class="row">
   <form materialize class="col s12" [formGroup]="form" (ngSubmit)="save()">
-
+    
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">recent_actors</i>
-        <input materialize="autocomplete" id="turma" type="text" name="turma" ng-reflect-materialize-params="[object Object]" ng-reflect-materialize="autocomplete">
-        <label for="turma" [class.active]="matricula.turma">Turma</label>
-        <ul class="autocomplete-content dropdown-content"></ul>
+        <input materialize="autocomplete" id="turma" type="text" name="turma" [materializeParams]="[{'data': turmas}]">
+        <label for="turma" >Turma</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">account_circle</i>
-        <input id="name" type="text" disabled="disabled" class="validate" [(ngModel)]="matricula.name" formControlName="name" [class.invalid]="form.controls['name'].touched && !form.controls['name'].valid">
-        <label for="name" [class.active]="matricula.name">Aluno</label>
+        <input id="aluno" type="text" disabled="disabled" class="validate" [(ngModel)]="aluno.nome" formControlName="aluno" [class.invalid]="form.controls['aluno'].touched && !form.controls['aluno'].valid">
+        <label for="aluno" [class.active]="aluno.nome">Aluno</label>
       </div>
     </div>
 
-    <div class="row">
+    <!--<div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">payment</i>
         <input id="valorTotal" type="text" disabled="disabled" class="validate" [(ngModel)]="matricula.valorTotal" formControlName="valorTotal">
         <label for="valorTotal" [class.active]="matricula.valorTotal">Valor Total</label>
       </div>
-    </div>
+    </div>-->
 
-    <div formGroupName="formaPagamento">
-      <!--<forma-pagamento></forma-pagamento>-->
-    </div>
+    <!--<div formGroupName="formaPagamento">
+      <forma-pagamento></forma-pagamento>
+    </div>-->
 
     <div class="buttons right">
       <button class="btn waves-effect waves-light" type="button">
