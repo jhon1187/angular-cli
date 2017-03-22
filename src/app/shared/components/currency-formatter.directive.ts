@@ -26,12 +26,12 @@ export class CurrencyFormatterDirective implements OnInit {
         }
     }
 
-    @HostListener("change", ["$event.target.value"])
-    onChange(value) {
-        if (this.el.value) {
-            this.el.value = this.currencyPipe.transform(value);
-        }
-    }
+    // @HostListener("ngModelChange", ["$event"])
+    // onChange(value) {
+    //     if (this.el.value) {
+    //         this.el.value = this.currencyPipe.transform(value);
+    //     }
+    // }
 
     @HostListener("blur", ["$event.target.value"])
     onBlur(value) {

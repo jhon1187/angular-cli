@@ -25,8 +25,8 @@
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">payment</i>
-        <input id="valorTotal" name="valorTotal" type="text" class="validate" currencyFormatter [ngModel]="matriculaForm.valorTotal" formControlName="valorTotal">
-        <label for="valorTotal" [class.active]="matriculaForm.valorTotal">Valor Total</label>
+        <input id="valorTotal" name="valorTotal" type="text" class="validate" disabled="disabled" currencyFormatter [ngModel]="valorTotal" formControlName="valorTotal">
+        <label for="valorTotal" [class.active]="valorTotal">Valor Total</label>
       </div>
     </div>
 

@@ -9,6 +9,7 @@ import { Turma } from '../entities/turma';
 import { MatriculaForm } from './matricula-form';
 
 import { MatriculaService } from '../matricula.service';
+import { CurrencyPipe } from "../../shared/components/currency.pipe";
 
 @Component({
   selector: 'app-matricula-form',
@@ -26,16 +27,16 @@ export class MatriculaFormComponent implements OnInit {
   matricula: Matricula = new Matricula();
   aluno : Aluno = new Aluno();
   turma : Turma = new Turma();
-
   turmas : Turma[] = [];
-
-  matriculaForm: MatriculaForm = new MatriculaForm();
+  valorTotal : string = "";
+  
 
   constructor(
     formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private matriculaService: MatriculaService
+    private matriculaService: MatriculaService,
+    private currencyPipe: CurrencyPipe
   ) {
     this.form = formBuilder.group({
       turma: ['', [
@@ -102,7 +103,7 @@ export class MatriculaFormComponent implements OnInit {
 
   turmaAlterada() {
     if(this.turmaAutoCompleteSelected == ""){
-        this.matriculaForm.valorTotal = null;
+        this.valorTotal = null;
         return;
     }
 
@@ -110,7 +111,7 @@ export class MatriculaFormComponent implements OnInit {
     let idTurma = Number(turmaSelectedSplit[0].trim());
 
     if(isNaN(idTurma)){
-        this.matriculaForm.valorTotal = null;
+        this.valorTotal = null;
         return;
     }
 
@@ -118,7 +119,7 @@ export class MatriculaFormComponent implements OnInit {
       return (turma.id == idTurma);
     } );
 
-    this.matriculaForm.valorTotal = turma.valor;
+    this.valorTotal = this.currencyPipe.transform(turma.valor);
   }
 
   save() {

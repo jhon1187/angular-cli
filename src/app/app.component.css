@@ -5,3 +5,7 @@ main{
 .title{
     margin-bottom: 20px !important;
 }
+
+input[type=text]:disabled, input[type=text]:disabled + label{
+    color: rgba(0, 0, 0, 0) !important;
+}
