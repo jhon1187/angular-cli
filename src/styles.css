@@ -8,3 +8,11 @@ input[type=text]:disabled, input[type=text]:disabled + label{
     margin-left: 15px;
     margin-bottom: 15px;
 }
+
+.title{
+    margin-bottom: 20px !important;
+}
+
+.card-panel .title span {
+    font-size: 1.5em !important;
+}
