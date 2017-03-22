@@ -8,8 +8,9 @@
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">recent_actors</i>
-        <input id="turma" name="turma" type="text" class="validate" formControlName="turma" [(ngModel)]="turma.nome" materialize="autocomplete" [materializeParams]="[{'data': turmasAutoComplete }]">
-        <label for="turma" [class.active]="turma.nome">Turma</label>
+        <input id="turma" name="turma" type="text" class="validate" formControlName="turma" [(ngModel)]="turmaAutoCompleteSelected" (ngModelChange)="turmaAlterada()"
+        materialize="autocomplete" [materializeParams]="[{'data': turmasAutoComplete }]">
+        <label for="turma" [class.active]="turmaAutoCompleteSelected">Turma</label>
       </div>
     </div>
 
@@ -21,20 +22,20 @@
       </div>
     </div>
 
-    <!--<div class="row">
+    <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">payment</i>
-        <input id="valorTotal" type="text" disabled="disabled" class="validate" [(ngModel)]="matricula.valorTotal" formControlName="valorTotal">
-        <label for="valorTotal" [class.active]="matricula.valorTotal">Valor Total</label>
+        <input id="valorTotal" name="valorTotal" type="text" disabled="disabled" class="validate" [(ngModel)]="matriculaForm.valorTotal" formControlName="valorTotal">
+        <label for="valorTotal" [class.active]="matriculaForm.valorTotal">Valor Total</label>
       </div>
-    </div>-->
+    </div>
 
     <!--<div formGroupName="formaPagamento">
       <forma-pagamento></forma-pagamento>
     </div>-->
 
     <div class="buttons right">
-      <button class="btn waves-effect waves-light" type="button">
+      <button class="btn waves-effect waves-light" onclick="history.go(-1)" type="button">
           Voltar
       </button>
       <button class="btn waves-effect waves-light" type="submit" [disabled]="!form.valid">

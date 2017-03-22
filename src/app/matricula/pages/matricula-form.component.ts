@@ -6,6 +6,8 @@ import { Matricula } from '../entities/matricula';
 import { Aluno } from '../entities/aluno';
 import { Turma } from '../entities/turma';
 
+import { MatriculaForm } from './matricula-form';
+
 import { MatriculaService } from '../matricula.service';
 
 @Component({
@@ -19,11 +21,15 @@ export class MatriculaFormComponent implements OnInit {
   title: string;
 
   turmasAutoComplete : any = {};
+  turmaAutoCompleteSelected : string = "";
 
   matricula: Matricula = new Matricula();
   aluno : Aluno = new Aluno();
   turma : Turma = new Turma();
+
   turmas : Turma[] = [];
+
+  matriculaForm: MatriculaForm = new MatriculaForm();
 
   constructor(
     formBuilder: FormBuilder,
@@ -66,7 +72,10 @@ export class MatriculaFormComponent implements OnInit {
       });
 
       this.matriculaService.getTurmas().subscribe(
-        turmas => this.gerarTurmasAutoComplete(turmas),
+        turmas => {
+          this.turmas = turmas;
+          this.gerarTurmasAutoComplete();
+        },
         response => {
           if (response.status == 404) {
             this.router.navigate(['NotFound']);
@@ -74,22 +83,46 @@ export class MatriculaFormComponent implements OnInit {
       });
 
       this.turmasAutoComplete = {'apple': null, 'google': null};
+
     });
   }
 
-  gerarTurmasAutoComplete(turmas) {
-    this.turmas = turmas;
+  gerarTurmasAutoComplete() {
+    let autoCompleteObj = {};
 
-    turmas.forEach(turma => {
-      // {turma.nome : null}
-      // this.turmasAutoComplete.put()
+    this.turmas.forEach(turma => {
+      let valorAutoComplete : string = turma.id + " - " + turma.nome;
+      let iconeAutoComplete : string = null;
+
+      autoCompleteObj[valorAutoComplete] = iconeAutoComplete;
     });
-    
-    this.turmasAutoComplete
+
+    this.turmasAutoComplete = autoCompleteObj;
+  }
+
+  turmaAlterada() {
+    if(this.turmaAutoCompleteSelected == ""){
+        this.matriculaForm.valorTotal = null;
+        return;
+    }
+
+    let turmaSelectedSplit: string[] = this.turmaAutoCompleteSelected.split("-");
+    let idTurma = Number(turmaSelectedSplit[0].trim());
+
+    if(isNaN(idTurma)){
+        this.matriculaForm.valorTotal = null;
+        return;
+    }
+
+    let turma = this.turmas.find( turma => {
+      return (turma.id == idTurma);
+    } );
+
+    this.matriculaForm.valorTotal = turma.valor;
   }
 
   save() {
-    var result, matriculaValue = this.form.value;
+    let result, matriculaValue = this.form.value;
    
     result = this.matriculaService.addMatricula(matriculaValue);
 
