@@ -17,7 +17,7 @@
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">account_circle</i>
-        <input id="aluno" name="aluno" type="text" disabled="disabled" class="validate" formControlName="aluno" [(ngModel)]="aluno.nome">
+        <input id="aluno" name="aluno" type="text" disabled="disabled" class="validate" formControlName="aluno" [ngModel]="aluno.nome">
         <label for="aluno" [class.active]="aluno.nome">Aluno</label>
       </div>
     </div>
@@ -25,7 +25,7 @@
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">payment</i>
-        <input id="valorTotal" name="valorTotal" type="text" disabled="disabled" class="validate" [(ngModel)]="matriculaForm.valorTotal" formControlName="valorTotal">
+        <input id="valorTotal" name="valorTotal" type="text" class="validate" currencyFormatter [ngModel]="matriculaForm.valorTotal" formControlName="valorTotal">
         <label for="valorTotal" [class.active]="matriculaForm.valorTotal">Valor Total</label>
       </div>
     </div>

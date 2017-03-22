@@ -10,9 +10,13 @@ import { MaterializeDirective } from 'angular2-materialize';
 import { MatriculaService } from './matricula.service';
 import { MatriculaFormComponent } from './pages/matricula-form.component';
 
+import { CurrencyPipe } from "../shared/components/currency.pipe";
+import { CurrencyFormatterDirective } from "../shared/components/currency-formatter.directive";
+
 @NgModule({
   declarations: [
-    MatriculaFormComponent
+    MatriculaFormComponent,
+    CurrencyFormatterDirective
   ],
   imports: [
     CommonModule,
@@ -26,7 +30,8 @@ import { MatriculaFormComponent } from './pages/matricula-form.component';
     MaterializeDirective
   ],
   providers: [
-    MatriculaService
+    MatriculaService,
+    CurrencyPipe
   ]
 })
 export class MatriculaModule { }
