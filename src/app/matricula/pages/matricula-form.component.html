@@ -1,45 +1,47 @@
-<div class="title">
-  <h5>{{ title }}</h5>
-</div>
+<div class="card-panel">
+  <div class="title">
+    <span>{{ title }}</span>
+  </div>
 
-<div class="row">
-  <form materialize class="col s12" [formGroup]="form" (ngSubmit)="save()">
-    
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">recent_actors</i>
-        <input id="turma" name="turma" type="text" class="validate" formControlName="turma" [(ngModel)]="turmaAutoCompleteSelected" (ngModelChange)="turmaAlterada()"
-        materialize="autocomplete" [materializeParams]="[{'data': turmasAutoComplete }]">
-        <label for="turma" [class.active]="turmaAutoCompleteSelected">Turma</label>
+  <div class="row">
+    <form materialize class="col s12" [formGroup]="form" (ngSubmit)="save()">
+      
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">recent_actors</i>
+          <input id="turma" name="turma" type="text" class="validate" formControlName="turma" [(ngModel)]="turmaAutoCompleteSelected" (ngModelChange)="turmaAlterada()"
+          materialize="autocomplete" [materializeParams]="[{'data': turmasAutoComplete }]">
+          <label for="turma" [class.active]="turmaAutoCompleteSelected">Turma</label>
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">account_circle</i>
-        <input id="aluno" name="aluno" type="text" disabled="disabled" class="validate" formControlName="aluno" [ngModel]="aluno.nome">
-        <label for="aluno" [class.active]="aluno.nome">Aluno</label>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="aluno" name="aluno" type="text" disabled="disabled" class="validate" formControlName="aluno" [ngModel]="aluno.nome">
+          <label for="aluno" [class.active]="aluno.nome">Aluno</label>
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">payment</i>
-        <input id="valorTotal" name="valorTotal" type="text" class="validate" disabled="disabled" currencyFormatter [ngModel]="valorTotal" formControlName="valorTotal">
-        <label for="valorTotal" [class.active]="valorTotal">Valor Total</label>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">payment</i>
+          <input id="valorTotal" name="valorTotal" type="text" class="validate" disabled="disabled" currencyFormatter [ngModel]="valorTotal" formControlName="valorTotal">
+          <label for="valorTotal" [class.active]="valorTotal">Valor Total</label>
+        </div>
       </div>
-    </div>
 
-    <forma-pagamento></forma-pagamento>
+      <forma-pagamento *ngIf="valorTotal"></forma-pagamento>
 
-    <div class="buttons right">
-      <button class="btn waves-effect waves-light" onclick="history.go(-1)" type="button">
-          Voltar
-      </button>
-      <button class="btn waves-effect waves-light" type="submit" [disabled]="!form.valid">
-          Matricular<i class="material-icons right">send</i>
-      </button>
-    </div>
+      <div class="buttons right">
+        <button class="btn waves-effect waves-light" onclick="history.go(-1)" type="button">
+            Voltar
+        </button>
+        <button class="btn waves-effect waves-light" type="submit" [disabled]="!form.valid">
+            Matricular<i class="material-icons right">send</i>
+        </button>
+      </div>
 
-  </form>
+    </form>
+  </div>
 </div>

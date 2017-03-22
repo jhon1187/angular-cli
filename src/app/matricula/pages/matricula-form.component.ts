@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Matricula } from '../entities/matricula';
 import { Aluno } from '../entities/aluno';
 import { Turma } from '../entities/turma';
+import { FormaPagamento } from '../entities/formaPagamento';
 
 import { MatriculaForm } from './matricula-form';
 
@@ -30,6 +31,7 @@ export class MatriculaFormComponent implements OnInit {
   turmas : Turma[] = [];
   valorTotal : string = "";
   
+  formasPagamento: FormaPagamento[] = [];
 
   constructor(
     formBuilder: FormBuilder,
@@ -120,6 +122,7 @@ export class MatriculaFormComponent implements OnInit {
     } );
 
     this.valorTotal = this.currencyPipe.transform(turma.valor);
+    this.formasPagamento = turma.formasPagamento;
   }
 
   save() {
