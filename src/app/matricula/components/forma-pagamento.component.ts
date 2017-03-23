@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { FormaPagamento } from '../entities/formaPagamento';
 
 @Component({
@@ -13,6 +13,7 @@ export class FormaPagamentoComponent {
 
   tipoPagamentoSelecionado: string = null;
   parcelas: any[] = [];
+
   parcelaSelecionada: number = null;
   cartao: any = {};
 
@@ -21,6 +22,7 @@ export class FormaPagamentoComponent {
   formaPagamentoAlterado() {
     this.parcelas = [];
     this.parcelaSelecionada = null;
+    this.cartao = {};
 
     let formaPagamento = this.formasPagamento.find(formaPagamento => {
       return (formaPagamento.tipo == this.tipoPagamentoSelecionado);
