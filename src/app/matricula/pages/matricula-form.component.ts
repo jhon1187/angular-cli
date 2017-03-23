@@ -20,7 +20,7 @@ import { CurrencyPipe } from "../../shared/components/currency.pipe";
 export class MatriculaFormComponent implements OnInit {
 
   form: FormGroup;
-  title: string = null;
+  title: string = "";
 
   turmasAutoComplete: any = {};
   turmaAutoCompleteSelected: string = "";
@@ -84,9 +84,6 @@ export class MatriculaFormComponent implements OnInit {
             this.router.navigate(['NotFound']);
           }
         });
-
-      this.turmasAutoComplete = { 'apple': null, 'google': null };
-
     });
   }
 

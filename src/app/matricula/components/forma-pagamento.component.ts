@@ -1,5 +1,7 @@
 import { Component, Input, Output } from '@angular/core';
 import { FormaPagamento } from '../entities/formaPagamento';
+import { Cartao } from './entities/cartao';
+import { Parcela } from './entities/parcela';
 
 @Component({
   selector: 'forma-pagamento',
@@ -12,17 +14,17 @@ export class FormaPagamentoComponent {
   @Input("valorTotal") valorTotal: number = null;
 
   tipoPagamentoSelecionado: string = null;
-  parcelas: any[] = [];
+  parcelas: Parcela[] = [];
 
   parcelaSelecionada: number = null;
-  cartao: any = {};
+  cartao: Cartao = new Cartao();
 
   constructor() { }
 
   formaPagamentoAlterado() {
     this.parcelas = [];
     this.parcelaSelecionada = null;
-    this.cartao = {};
+    this.cartao = new Cartao();
 
     let formaPagamento = this.formasPagamento.find(formaPagamento => {
       return (formaPagamento.tipo == this.tipoPagamentoSelecionado);
@@ -32,7 +34,7 @@ export class FormaPagamentoComponent {
       let parcelaAtual = index + 1;
       let valorParcelado = this.valorTotal / parcelaAtual;
 
-      this.parcelas[index] = { "parcelaAtual": parcelaAtual, "valorParcelado": valorParcelado };
+      this.parcelas[index] = new Parcela(parcelaAtual, valorParcelado);
     }
 
   }
