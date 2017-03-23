@@ -12,10 +12,9 @@ export class FormaPagamentoComponent {
   @Input("valorTotal") valorTotal: number = null;
 
   tipoPagamentoSelecionado: string = null;
-
   parcelas: any[] = [];
-
   parcelaSelecionada: number = null;
+  cartao: any = {};
 
   constructor() { }
 
