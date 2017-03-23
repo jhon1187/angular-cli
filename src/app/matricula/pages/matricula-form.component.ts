@@ -22,15 +22,15 @@ export class MatriculaFormComponent implements OnInit {
   form: FormGroup;
   title: string = null;
 
-  turmasAutoComplete : any = {};
-  turmaAutoCompleteSelected : string = "";
+  turmasAutoComplete: any = {};
+  turmaAutoCompleteSelected: string = "";
 
   matricula: Matricula = new Matricula();
-  aluno : Aluno = new Aluno();
-  turma : Turma = new Turma();
-  turmas : Turma[] = [];
-  valorTotal : number = null;
-  
+  aluno: Aluno = new Aluno();
+  turma: Turma = new Turma();
+  turmas: Turma[] = [];
+  valorTotal: number = null;
+
   formasPagamento: FormaPagamento[] = [];
 
   constructor(
@@ -65,14 +65,14 @@ export class MatriculaFormComponent implements OnInit {
       var alunoId = params['alunoId'];
 
       this.title = 'Nova Matricula';
- 
+
       this.matriculaService.getAluno(alunoId).subscribe(
         aluno => this.aluno = aluno,
         response => {
           if (response.status == 404) {
             this.router.navigate(['NotFound']);
           }
-      });
+        });
 
       this.matriculaService.getTurmas().subscribe(
         turmas => {
@@ -83,9 +83,9 @@ export class MatriculaFormComponent implements OnInit {
           if (response.status == 404) {
             this.router.navigate(['NotFound']);
           }
-      });
+        });
 
-      this.turmasAutoComplete = {'apple': null, 'google': null};
+      this.turmasAutoComplete = { 'apple': null, 'google': null };
 
     });
   }
@@ -94,8 +94,8 @@ export class MatriculaFormComponent implements OnInit {
     let autoCompleteObj = {};
 
     this.turmas.forEach(turma => {
-      let valorAutoComplete : string = turma.id + " - " + turma.nome;
-      let iconeAutoComplete : string = null;
+      let valorAutoComplete: string = turma.id + " - " + turma.nome;
+      let iconeAutoComplete: string = null;
 
       autoCompleteObj[valorAutoComplete] = iconeAutoComplete;
     });
@@ -104,32 +104,30 @@ export class MatriculaFormComponent implements OnInit {
   }
 
   turmaAlterada() {
-    if(this.turmaAutoCompleteSelected == ""){
-        this.valorTotal = null;
-        return;
+    if (this.turmaAutoCompleteSelected == "") {
+      this.valorTotal = null;
+      return;
     }
 
     let turmaSelectedSplit: string[] = this.turmaAutoCompleteSelected.split("-");
     let idTurma = Number(turmaSelectedSplit[0].trim());
 
-    if(isNaN(idTurma)){
-        this.valorTotal = null;
-        return;
+    if (isNaN(idTurma)) {
+      this.valorTotal = null;
+      return;
     }
 
-    let turma = this.turmas.find( turma => {
+    let turma = this.turmas.find(turma => {
       return (turma.id == idTurma);
-    } );
+    });
 
-    this.valorTotal = (turma.valor/100);
+    this.valorTotal = (turma.valor / 100);
     this.formasPagamento = turma.formasPagamento;
-
-    console.info(this.formasPagamento);
   }
 
   save() {
     let result, matriculaValue = this.form.value;
-   
+
     result = this.matriculaService.addMatricula(matriculaValue);
 
     result.subscribe(data => this.router.navigate(['matricula/form']));

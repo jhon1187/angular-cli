@@ -6,8 +6,14 @@
 
   <div>
     <p *ngFor="let formaPagamento of formasPagamento">
-      <input name="group1" type="radio" id="test{{formaPagamento.id}}" />
+      <input name="group1" type="radio" id="test{{formaPagamento.id}}" [(ngModel)]="tipoPagamentoSelecionado" value="{{formaPagamento.tipo}}" (ngModelChange)="formaPagamentoAlterado()" />
       <label for="test{{formaPagamento.id}}">{{formaPagamento.tipo}}</label>
+    </p>
+  </div>
+
+  <div>
+    <p *ngFor="let parcela of parcelas">
+          {{parcela}}
     </p>
   </div>
 
