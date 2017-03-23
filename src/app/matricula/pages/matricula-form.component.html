@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <forma-pagamento [formasPagamento]="formasPagamento" [valorTotal]="valorTotal" *ngIf="valorTotal"></forma-pagamento>
+      <forma-pagamento [(model)]="formaPagamentoForm" [formasPagamento]="formasPagamento" [valorTotal]="valorTotal" *ngIf="valorTotal"></forma-pagamento>
 
       <div class="buttons right">
         <button class="btn waves-effect waves-light" onclick="history.go(-1)" type="button">

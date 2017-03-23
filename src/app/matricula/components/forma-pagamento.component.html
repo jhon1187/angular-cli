@@ -5,44 +5,44 @@
 
   <div>
     <p *ngFor="let formaPagamento of formasPagamento">
-      <input name="formaPagamentoGrupo" type="radio" id="formaPagamento_{{formaPagamento.id}}" [(ngModel)]="tipoPagamentoSelecionado"
+      <input name="formaPagamentoGrupo" type="radio" id="formaPagamento_{{formaPagamento.id}}" [(ngModel)]="model.tipoPagamento"
         value="{{formaPagamento.tipo}}" (ngModelChange)="formaPagamentoAlterado()" />
       <label for="formaPagamento_{{formaPagamento.id}}">{{formaPagamento.tipo}}</label>
     </p>
   </div>
 
-  <div class="separador" *ngIf="tipoPagamentoSelecionado == 'CARTAO_CREDITO'">
+  <div class="separador" *ngIf="model.tipoPagamento == 'CARTAO_CREDITO'">
     <div class="row">
       <div class="input-field col s12">
-        <input id="nomeCartao" name="nomeCartao" type="text" [ngModel]="cartao.nome">
-        <label for="nomeCartao" [class.active]="cartao.nome">Nome Impresso no Cartão</label>
+        <input id="nomeCartao" name="nomeCartao" type="text" [(ngModel)]="model.cartao.nome">
+        <label for="nomeCartao" [class.active]="model.cartao.nome">Nome Impresso no Cartão</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input id="numeroCartao" name="numeroCartao" type="text" [ngModel]="cartao.numero">
-        <label for="numeroCartao" [class.active]="cartao.numero">Número do Cartão</label>
+        <input id="numeroCartao" name="numeroCartao" type="text" [(ngModel)]="model.cartao.numero">
+        <label for="numeroCartao" [class.active]="model.cartao.numero">Número do Cartão</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input id="codigoCartao" name="codigoCartao" type="text" [ngModel]="cartao.codigo">
-        <label for="codigoCartao" [class.active]="cartao.codigo">Código de Segurança</label>
+        <input id="codigoCartao" name="codigoCartao" type="text" [(ngModel)]="model.cartao.codigo">
+        <label for="codigoCartao" [class.active]="model.cartao.codigo">Código de Segurança</label>
       </div>
     </div>
      <div class="row">
       <div class="input-field col s12">
-        <input id="validadeCartao" name="validadeCartao" type="text" materialize="pickadate" [materializeParams]="[{'format':'mm/yy'}]" [ngModel]="cartao.validade">
-        <label for="validadeCartao" [class.active]="cartao.validade">Validade</label>
+        <input id="validadeCartao" name="validadeCartao" type="text" materialize="pickadate" [materializeParams]="[{'format':'mm/yy'}]" [(ngModel)]="model.cartao.validade">
+        <label for="validadeCartao" [class.active]="model.cartao.validade">Validade</label>
       </div>
     </div>
   </div>
 
-  <div class="separador" *ngIf="tipoPagamentoSelecionado">
+  <div class="separador" *ngIf="model.tipoPagamento">
     <span>Parcelas:</span>
 
     <p *ngFor="let parcela of parcelas">
-      <input name="parcelaGrupo" type="radio" id="parcela_{{parcela.parcelaAtual}}" [(ngModel)]="parcelaSelecionada" value="{{parcela.parcelaAtual}}"
+      <input name="parcelaGrupo" type="radio" id="parcela_{{parcela.parcelaAtual}}" [(ngModel)]="model.parcela" value="{{parcela.parcelaAtual}}"
       />
       <label for="parcela_{{parcela.parcelaAtual}}">{{parcela.parcelaAtual}}x {{parcela.valorParcelado | currency:'BRL':true}}</label>
     </p>

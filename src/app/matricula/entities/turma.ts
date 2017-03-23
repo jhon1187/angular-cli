@@ -1,4 +1,4 @@
-import {FormaPagamento} from './formaPagamento';
+import {FormaPagamento} from './forma-pagamento';
 
 export class Turma {
   id: number;

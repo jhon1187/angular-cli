@@ -5,12 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Matricula } from '../entities/matricula';
 import { Aluno } from '../entities/aluno';
 import { Turma } from '../entities/turma';
-import { FormaPagamento } from '../entities/formaPagamento';
+import { FormaPagamento } from '../entities/forma-pagamento';
 
-import { MatriculaForm } from './matricula-form';
+import { MatriculaForm } from '../entities/matricula-form';
 
 import { MatriculaService } from '../matricula.service';
 import { CurrencyPipe } from "../../shared/components/currency.pipe";
+import { FormaPagamentoForm } from "app/matricula/components/entities/forma-pagemento-form";
 
 @Component({
   selector: 'app-matricula-form',
@@ -29,9 +30,10 @@ export class MatriculaFormComponent implements OnInit {
   aluno: Aluno = new Aluno();
   turma: Turma = new Turma();
   turmas: Turma[] = [];
-  valorTotal: number = null;
 
+  valorTotal: number = null;
   formasPagamento: FormaPagamento[] = [];
+  formaPagamentoForm: FormaPagamentoForm = null;
 
   constructor(
     formBuilder: FormBuilder,
@@ -120,6 +122,7 @@ export class MatriculaFormComponent implements OnInit {
 
     this.valorTotal = (turma.valor / 100);
     this.formasPagamento = turma.formasPagamento;
+    this.formaPagamentoForm = new FormaPagamentoForm();
   }
 
   save() {
