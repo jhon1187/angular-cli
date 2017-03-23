@@ -1,5 +1,5 @@
 export class FormaPagamento {
   id: number;
-  nome: string;
+  tipo: string;
   parcelas: number;
 }

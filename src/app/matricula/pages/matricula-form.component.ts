@@ -123,6 +123,8 @@ export class MatriculaFormComponent implements OnInit {
 
     this.valorTotal = this.currencyPipe.transform(turma.valor);
     this.formasPagamento = turma.formasPagamento;
+
+    console.info(this.formasPagamento);
   }
 
   save() {

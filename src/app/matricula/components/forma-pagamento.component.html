@@ -5,9 +5,9 @@
   </div>
 
   <div>
-    <p *ngFor="let formaPagamento of formasPagemento">
+    <p *ngFor="let formaPagamento of formasPagamento">
       <input name="group1" type="radio" id="test{{formaPagamento.id}}" />
-      <label for="test{{formaPagamento.id}}">{{formaPagamento.nome}}</label>
+      <label for="test{{formaPagamento.id}}">{{formaPagamento.tipo}}</label>
     </p>
   </div>
 
