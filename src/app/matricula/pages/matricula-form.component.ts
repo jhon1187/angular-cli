@@ -20,7 +20,7 @@ import { CurrencyPipe } from "../../shared/components/currency.pipe";
 export class MatriculaFormComponent implements OnInit {
 
   form: FormGroup;
-  title: string;
+  title: string = null;
 
   turmasAutoComplete : any = {};
   turmaAutoCompleteSelected : string = "";
@@ -29,7 +29,7 @@ export class MatriculaFormComponent implements OnInit {
   aluno : Aluno = new Aluno();
   turma : Turma = new Turma();
   turmas : Turma[] = [];
-  valorTotal : string = "";
+  valorTotal : number = null;
   
   formasPagamento: FormaPagamento[] = [];
 
@@ -121,7 +121,7 @@ export class MatriculaFormComponent implements OnInit {
       return (turma.id == idTurma);
     } );
 
-    this.valorTotal = this.currencyPipe.transform(turma.valor);
+    this.valorTotal = (turma.valor/100);
     this.formasPagamento = turma.formasPagamento;
 
     console.info(this.formasPagamento);
