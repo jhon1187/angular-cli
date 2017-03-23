@@ -13,20 +13,26 @@ export class FormaPagamentoComponent {
 
   tipoPagamentoSelecionado: string = null;
 
-  parcelas: string [] = [];
+  parcelas: any[] = [];
+
+  parcelaSelecionada: number = null;
 
   constructor() { }
 
   formaPagamentoAlterado() {
-      let formaPagamento = this.formasPagamento.find(formaPagamento => {
-        return (formaPagamento.tipo == this.tipoPagamentoSelecionado);
-      });
+    this.parcelas = [];
+    this.parcelaSelecionada = null;
 
-      this.parcelas = new Array(formaPagamento.parcelas);
+    let formaPagamento = this.formasPagamento.find(formaPagamento => {
+      return (formaPagamento.tipo == this.tipoPagamentoSelecionado);
+    });
 
-      for (var index = 1; index < formaPagamento.parcelas + 1; index++) {
-        this.parcelas[index-1] = index + "x " + (this.valorTotal / index);
-      }
+    for (var index = 0; index < formaPagamento.parcelas; index++) {
+      let parcelaAtual = index + 1;
+      let valorParcelado = this.valorTotal / parcelaAtual;
+
+      this.parcelas[index] = { "parcelaAtual": parcelaAtual, "valorParcelado": valorParcelado };
+    }
 
   }
 }

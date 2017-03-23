@@ -6,15 +6,17 @@
 
   <div>
     <p *ngFor="let formaPagamento of formasPagamento">
-      <input name="group1" type="radio" id="test{{formaPagamento.id}}" [(ngModel)]="tipoPagamentoSelecionado" value="{{formaPagamento.tipo}}" (ngModelChange)="formaPagamentoAlterado()" />
-      <label for="test{{formaPagamento.id}}">{{formaPagamento.tipo}}</label>
+      <input name="formaPagamentoGrupo" type="radio" id="formaPagamento_{{formaPagamento.id}}" [(ngModel)]="tipoPagamentoSelecionado" value="{{formaPagamento.tipo}}" (ngModelChange)="formaPagamentoAlterado()" />
+      <label for="formaPagamento_{{formaPagamento.id}}">{{formaPagamento.tipo}}</label>
     </p>
   </div>
 
-  <div>
+  <div class="separador" *ngIf="tipoPagamentoSelecionado">
+    <span>Parcelas:</span>
+
     <p *ngFor="let parcela of parcelas">
-          {{parcela}}
+      <input name="parcelaGrupo" type="radio" id="parcela_{{parcela.parcelaAtual}}" [(ngModel)]="parcelaSelecionada" value="{{parcela.parcelaAtual}}" />
+      <label for="parcela_{{parcela.parcelaAtual}}">{{parcela.parcelaAtual}}x {{parcela.valorParcelado | currency:'BRL':true}}</label>
     </p>
   </div>
-
 </div>
