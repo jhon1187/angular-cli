@@ -10,6 +10,7 @@ import { MatriculaForm } from '../entities/matricula-form';
 import { MatriculaService } from '../matricula.service';
 import { CurrencyPipe } from "../../shared/components/currency.pipe";
 import { FormaPagamentoForm } from "app/matricula/components/entities/forma-pagemento-form";
+import { Matricula } from "app/matricula/entities/matricula";
 
 @Component({
   selector: 'app-matricula-form',
@@ -24,7 +25,6 @@ export class MatriculaFormComponent implements OnInit {
   model: MatriculaForm = new MatriculaForm();
 
   turmasAutoComplete: any = {};
-
   turmas: Turma[] = [];
 
   constructor(
@@ -60,24 +60,14 @@ export class MatriculaFormComponent implements OnInit {
 
       this.title = 'Nova Matricula';
 
-      this.matriculaService.getAluno(alunoId).subscribe(
-        aluno => this.model.aluno = aluno,
-        response => {
-          if (response.status == 404) {
-            this.router.navigate(['NotFound']);
-          }
-        });
+      this.matriculaService.getAluno(alunoId).subscribe(aluno => this.model.aluno = aluno);
 
       this.matriculaService.getTurmas().subscribe(
         turmas => {
           this.turmas = turmas;
           this.gerarTurmasAutoComplete();
-        },
-        response => {
-          if (response.status == 404) {
-            this.router.navigate(['NotFound']);
-          }
-        });
+        }
+      );
     });
   }
 
@@ -96,7 +86,7 @@ export class MatriculaFormComponent implements OnInit {
 
   turmaAlterada() {
 
-    if (!this.model.turma || !this.model.turma.nome ||this.model.turma.nome.trim() == "") {
+    if (!this.model.turma || !this.model.turma.nome || this.model.turma.nome.trim() == "") {
       this.model.valorTotal = null;
       return;
     }
@@ -119,10 +109,15 @@ export class MatriculaFormComponent implements OnInit {
   }
 
   save() {
-    let result, matriculaValue = this.form.value;
+    let matricula : Matricula = new Matricula(),
+    result : any = null;
 
-    result = this.matriculaService.addMatricula(matriculaValue);
+    matricula.alunoId = this.model.aluno.id;
+    matricula.formaPagamento = this.model.formaPagamentoForm.tipoPagamento;
+    matricula.quantidadeParcelas = this.model.formaPagamentoForm.parcela.quantidade;
+    matricula.turmaId = this.model.turma.id;
 
+    result = this.matriculaService.addMatricula(matricula);
     result.subscribe(data => this.router.navigate(['matricula/form']));
   }
 }

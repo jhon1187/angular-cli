@@ -5,6 +5,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
+import { Matricula } from "app/matricula/entities/matricula";
+import { MatriculaForm } from "app/matricula/entities/matricula-form";
+
 @Injectable()
 export class MatriculaService {
 
@@ -24,7 +27,7 @@ export class MatriculaService {
       .map(res => res.json());
   }
 
-  addMatricula(matricula) {
+  addMatricula(matricula : Matricula) {
     return this.http.post(this.url, JSON.stringify(matricula))
       .map(res => res.json());
   }

@@ -1,6 +1,6 @@
 import { FormaPagamento } from './../../crud-exemplo/entities/formaPagamento';
 export class Turma {
-  id: number;
+  id: string;
   nome: string;
   valor: number;
   formasPagamento: FormaPagamento[] = [];
