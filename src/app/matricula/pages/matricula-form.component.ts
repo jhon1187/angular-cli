@@ -21,10 +21,10 @@ import { FormaPagamentoForm } from "app/matricula/components/entities/forma-page
 export class MatriculaFormComponent implements OnInit {
 
   form: FormGroup;
-  title: string = "";
+  title: string = null;
 
   turmasAutoComplete: any = {};
-  turmaAutoCompleteSelected: string = "";
+  turmaAutoCompleteSelected: string = null;
 
   matricula: Matricula = new Matricula();
   aluno: Aluno = new Aluno();
@@ -103,7 +103,8 @@ export class MatriculaFormComponent implements OnInit {
   }
 
   turmaAlterada() {
-    if (this.turmaAutoCompleteSelected == "") {
+
+    if (!this.turmaAutoCompleteSelected || this.turmaAutoCompleteSelected.trim() == "") {
       this.valorTotal = null;
       return;
     }
