@@ -1,7 +1,7 @@
-import { Component, Input, Output } from '@angular/core';
-import { FormaPagamento } from '../entities/forma-pagamento';
-import { FormaPagamentoForm } from './entities/forma-pagemento-form';
 import { Parcela } from './entities/parcela';
+import { Component, Input, Output } from '@angular/core';
+import { FormaPagamento } from './entities/forma-pagamento';
+import { FormaPagamentoForm } from './entities/forma-pagemento-form';
 import { Cartao } from './entities/cartao';
 
 @Component({
@@ -20,7 +20,7 @@ export class FormaPagamentoComponent {
   constructor() { }
 
   formaPagamentoAlterado() {
-    this.model.parcela = null;
+    this.model.parcela = new Parcela();
     this.model.cartao = new Cartao();
 
     this.parcelas = [];
@@ -30,10 +30,10 @@ export class FormaPagamentoComponent {
     });
 
     for (var index = 0; index < formaPagamento.parcelas; index++) {
-      let parcelaAtual = index + 1;
-      let valorParcelado = this.valorTotal / parcelaAtual;
+      let parcela = index + 1;
+      let valor = this.valorTotal / parcela;
 
-      this.parcelas[index] = new Parcela(parcelaAtual, valorParcelado);
+      this.parcelas[index] = new Parcela(parcela, valor);
     }
 
   }

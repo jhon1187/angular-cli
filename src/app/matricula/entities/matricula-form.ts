@@ -1,9 +1,10 @@
-import { FormaPagamentoForm } from './../components/entities/forma-pagemento-form';
+import { Turma } from './turma';
 import { Aluno } from './aluno';
+import { FormaPagamentoForm } from './../components/entities/forma-pagemento-form';
 
 export class MatriculaForm {
-  turma: string;
-  aluno: Aluno;
+  turma: Turma = new Turma();
+  aluno: Aluno = new Aluno;
   valorTotal: number;
   formaPagamentoForm: FormaPagamentoForm;
 }

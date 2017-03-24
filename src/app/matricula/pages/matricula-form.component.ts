@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Aluno } from '../entities/aluno';
 import { Turma } from '../entities/turma';
-import { FormaPagamento } from '../entities/forma-pagamento';
 
 import { MatriculaForm } from '../entities/matricula-form';
 
@@ -27,8 +26,6 @@ export class MatriculaFormComponent implements OnInit {
   turmasAutoComplete: any = {};
 
   turmas: Turma[] = [];
-
-  formasPagamento: FormaPagamento[] = [];
 
   constructor(
     formBuilder: FormBuilder,
@@ -99,12 +96,12 @@ export class MatriculaFormComponent implements OnInit {
 
   turmaAlterada() {
 
-    if (!this.model.turma || this.model.turma.trim() == "") {
+    if (!this.model.turma || !this.model.turma.nome ||this.model.turma.nome.trim() == "") {
       this.model.valorTotal = null;
       return;
     }
 
-    let turmaSelectedSplit: string[] = this.model.turma.split("-");
+    let turmaSelectedSplit: string[] = this.model.turma.nome.split("-");
     let idTurma = Number(turmaSelectedSplit[0].trim());
 
     if (isNaN(idTurma)) {
@@ -117,7 +114,7 @@ export class MatriculaFormComponent implements OnInit {
     });
 
     this.model.valorTotal = (turma.valor / 100);
-    this.formasPagamento = turma.formasPagamento;
+    this.model.turma.formasPagamento = turma.formasPagamento;
     this.model.formaPagamentoForm = new FormaPagamentoForm();
   }
 

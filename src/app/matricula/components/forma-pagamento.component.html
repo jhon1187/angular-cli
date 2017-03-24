@@ -42,9 +42,9 @@
     <span>Parcelas:</span>
 
     <p *ngFor="let parcela of parcelas">
-      <input name="parcelaGrupo" type="radio" id="parcela_{{parcela.parcelaAtual}}" [(ngModel)]="model.parcela" value="{{parcela.parcelaAtual}}"
+      <input name="parcelaGrupo" type="radio" id="parcela_{{parcela.quantidade}}" [(ngModel)]="model.parcela.quantidade" value="{{parcela.quantidade}}"
       />
-      <label for="parcela_{{parcela.parcelaAtual}}">{{parcela.parcelaAtual}}x {{parcela.valorParcelado | currency:'BRL':true}}</label>
+      <label for="parcela_{{parcela.quantidade}}">{{parcela.quantidade}}x {{parcela.valor | currency:'BRL':true}}</label>
     </p>
   </div>
 </div>

@@ -1,10 +1,10 @@
 export class Parcela {
 
-  constructor(parcelaAtual, valorParcelado){
-    this.parcelaAtual = parcelaAtual;
-    this.valorParcelado = valorParcelado;
+  constructor(quantidade?, valor?){
+    this.quantidade = quantidade;
+    this.valor = valor;
   }
 
-  parcelaAtual: number;
-  valorParcelado: number;
+  quantidade: number;
+  valor: number;
 }

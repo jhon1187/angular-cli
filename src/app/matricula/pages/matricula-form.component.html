@@ -9,9 +9,9 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">recent_actors</i>
-          <input id="turma" name="turma" type="text" class="validate" formControlName="turma" [(ngModel)]="model.turma" (ngModelChange)="turmaAlterada()"
+          <input id="turma" name="turma" type="text" class="validate" formControlName="turma" [(ngModel)]="model.turma.nome" (ngModelChange)="turmaAlterada()"
           materialize="autocomplete" [materializeParams]="[{'data': turmasAutoComplete }]">
-          <label for="turma" [class.active]="model.turma">Turma</label>
+          <label for="turma" [class.active]="model.turma.nome">Turma</label>
         </div>
       </div>
 
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <forma-pagamento [(model)]="model.formaPagamentoForm" [formasPagamento]="formasPagamento" [valorTotal]="model.valorTotal" *ngIf="model.valorTotal"></forma-pagamento>
+      <forma-pagamento [(model)]="model.formaPagamentoForm" [formasPagamento]="model.turma.formasPagamento" [valorTotal]="model.valorTotal" *ngIf="model.valorTotal"></forma-pagamento>
 
       <div class="buttons right">
         <button class="btn waves-effect waves-light" onclick="history.go(-1)" type="button">
@@ -45,3 +45,5 @@
     </form>
   </div>
 </div>
+
+{{model | json}}
