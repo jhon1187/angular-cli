@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Matricula } from '../entities/matricula';
 import { Aluno } from '../entities/aluno';
 import { Turma } from '../entities/turma';
 import { FormaPagamento } from '../entities/forma-pagamento';
@@ -23,17 +22,13 @@ export class MatriculaFormComponent implements OnInit {
   form: FormGroup;
   title: string = null;
 
-  turmasAutoComplete: any = {};
-  turmaAutoCompleteSelected: string = null;
+  model: MatriculaForm = new MatriculaForm();
 
-  matricula: Matricula = new Matricula();
-  aluno: Aluno = new Aluno();
-  turma: Turma = new Turma();
+  turmasAutoComplete: any = {};
+
   turmas: Turma[] = [];
 
-  valorTotal: number = null;
   formasPagamento: FormaPagamento[] = [];
-  formaPagamentoForm: FormaPagamentoForm = null;
 
   constructor(
     formBuilder: FormBuilder,
@@ -69,7 +64,7 @@ export class MatriculaFormComponent implements OnInit {
       this.title = 'Nova Matricula';
 
       this.matriculaService.getAluno(alunoId).subscribe(
-        aluno => this.aluno = aluno,
+        aluno => this.model.aluno = aluno,
         response => {
           if (response.status == 404) {
             this.router.navigate(['NotFound']);
@@ -104,16 +99,16 @@ export class MatriculaFormComponent implements OnInit {
 
   turmaAlterada() {
 
-    if (!this.turmaAutoCompleteSelected || this.turmaAutoCompleteSelected.trim() == "") {
-      this.valorTotal = null;
+    if (!this.model.turma || this.model.turma.trim() == "") {
+      this.model.valorTotal = null;
       return;
     }
 
-    let turmaSelectedSplit: string[] = this.turmaAutoCompleteSelected.split("-");
+    let turmaSelectedSplit: string[] = this.model.turma.split("-");
     let idTurma = Number(turmaSelectedSplit[0].trim());
 
     if (isNaN(idTurma)) {
-      this.valorTotal = null;
+      this.model.valorTotal = null;
       return;
     }
 
@@ -121,9 +116,9 @@ export class MatriculaFormComponent implements OnInit {
       return (turma.id == idTurma);
     });
 
-    this.valorTotal = (turma.valor / 100);
+    this.model.valorTotal = (turma.valor / 100);
     this.formasPagamento = turma.formasPagamento;
-    this.formaPagamentoForm = new FormaPagamentoForm();
+    this.model.formaPagamentoForm = new FormaPagamentoForm();
   }
 
   save() {
