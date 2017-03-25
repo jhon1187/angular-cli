@@ -1,5 +1,7 @@
+import { TipoFormaPagamento } from "app/matricula/components/entities/tipo-forma-pagamento";
+
 export class FormaPagamento {
   id: number;
-  tipo: string;
+  tipo: TipoFormaPagamento;
   parcelas: number;
 }

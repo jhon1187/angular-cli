@@ -92,9 +92,9 @@ export class MatriculaFormComponent implements OnInit {
     }
 
     let turmaSelectedSplit: string[] = this.model.turma.nome.split("-");
-    let idTurma = Number(turmaSelectedSplit[0].trim());
+    let idTurma = turmaSelectedSplit[0].trim();
 
-    if (isNaN(idTurma)) {
+    if (idTurma || idTurma == "") {
       this.model.valorTotal = null;
       return;
     }

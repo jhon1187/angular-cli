@@ -18,7 +18,8 @@ import { CurrencyFormatterDirective } from "../shared/components/currency-format
   declarations: [
     MatriculaFormComponent,
     FormaPagamentoComponent,
-    CurrencyFormatterDirective
+    CurrencyFormatterDirective,
+    CurrencyPipe
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { FormaPagamento } from './../../crud-exemplo/entities/formaPagamento';
+import { FormaPagamento } from './../components/entities/forma-pagamento';
 export class Turma {
   id: string;
   nome: string;

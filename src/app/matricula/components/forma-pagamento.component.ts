@@ -26,7 +26,7 @@ export class FormaPagamentoComponent {
     this.parcelas = [];
 
     let formaPagamento = this.formasPagamento.find(formaPagamento => {
-      return (formaPagamento.tipo == this.model.tipoPagamento);
+      return (formaPagamento.tipo[formaPagamento.tipo] == this.model.tipoPagamento);
     });
 
     for (var index = 0; index < formaPagamento.parcelas; index++) {
