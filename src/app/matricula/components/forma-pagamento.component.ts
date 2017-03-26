@@ -1,3 +1,4 @@
+import { TipoFormaPagamento } from 'app/matricula/components/entities/tipo-forma-pagamento';
 import { Parcela } from './entities/parcela';
 import { Component, Input, Output } from '@angular/core';
 import { FormaPagamento } from './entities/forma-pagamento';
@@ -17,6 +18,8 @@ export class FormaPagamentoComponent {
 
   parcelas: Parcela[] = [];
 
+  TipoFormaPagamento: typeof TipoFormaPagamento = TipoFormaPagamento;
+
   constructor() { }
 
   formaPagamentoAlterado() {
@@ -26,7 +29,7 @@ export class FormaPagamentoComponent {
     this.parcelas = [];
 
     let formaPagamento = this.formasPagamento.find(formaPagamento => {
-      return (formaPagamento.tipo[formaPagamento.tipo] == this.model.tipoPagamento);
+      return (formaPagamento.tipo == this.model.tipoPagamento);
     });
 
     for (var index = 0; index < formaPagamento.parcelas; index++) {

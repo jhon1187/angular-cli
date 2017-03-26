@@ -7,11 +7,11 @@
     <p *ngFor="let formaPagamento of formasPagamento">
       <input name="formaPagamentoGrupo" type="radio" id="formaPagamento_{{formaPagamento.id}}" [(ngModel)]="model.tipoPagamento"
         value="{{formaPagamento.tipo}}" (ngModelChange)="formaPagamentoAlterado()" />
-      <label for="formaPagamento_{{formaPagamento.id}}">{{formaPagamento.tipo}}</label>
+      <label for="formaPagamento_{{formaPagamento.id}}">{{TipoFormaPagamento[formaPagamento.tipo]}}</label>
     </p>
   </div>
 
-  <div class="separador" *ngIf="model.tipoPagamento == 'CARTAO_CREDITO'">
+  <div class="separador" *ngIf="model.tipoPagamento == 1">
     <div class="row">
       <div class="input-field col s12">
         <input id="nomeCartao" name="nomeCartao" type="text" [(ngModel)]="model.cartao.nome">

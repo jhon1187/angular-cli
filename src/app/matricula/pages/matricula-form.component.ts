@@ -8,7 +8,6 @@ import { Turma } from '../entities/turma';
 import { MatriculaForm } from '../entities/matricula-form';
 
 import { MatriculaService } from '../matricula.service';
-import { CurrencyPipe } from "../../shared/components/currency.pipe";
 import { FormaPagamentoForm } from "app/matricula/components/entities/forma-pagemento-form";
 import { Matricula } from "app/matricula/entities/matricula";
 
@@ -31,7 +30,6 @@ export class MatriculaFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private matriculaService: MatriculaService,
-    private currencyPipe: CurrencyPipe
   ) {
     this.form = formBuilder.group({
       turma: ['', [
@@ -120,6 +118,8 @@ export class MatriculaFormComponent implements OnInit {
     matricula.formaPagamento = this.model.formaPagamentoForm.tipoPagamento;
     matricula.quantidadeParcelas = this.model.formaPagamentoForm.parcela.quantidade;
     matricula.turmaId = this.model.turma.id;
+
+    console.info(matricula);
 
     result = this.matriculaService.addMatricula(matricula);
     result.subscribe(data => this.router.navigate(['matricula/form']));

@@ -11,7 +11,7 @@ import { MatriculaService } from './matricula.service';
 import { MatriculaFormComponent } from './pages/matricula-form.component';
 import { FormaPagamentoComponent } from './components/forma-pagamento.component';
 
-import { CurrencyPipe } from "../shared/components/currency.pipe";
+import { CurrencyCustomPipe } from "../shared/components/currency-custom.pipe";
 import { CurrencyFormatterDirective } from "../shared/components/currency-formatter.directive";
 
 @NgModule({
@@ -19,7 +19,7 @@ import { CurrencyFormatterDirective } from "../shared/components/currency-format
     MatriculaFormComponent,
     FormaPagamentoComponent,
     CurrencyFormatterDirective,
-    CurrencyPipe
+    CurrencyCustomPipe
   ],
   imports: [
     CommonModule,
@@ -34,7 +34,7 @@ import { CurrencyFormatterDirective } from "../shared/components/currency-format
   ],
   providers: [
     MatriculaService,
-    CurrencyPipe
+    CurrencyCustomPipe
   ]
 })
 export class MatriculaModule { }
