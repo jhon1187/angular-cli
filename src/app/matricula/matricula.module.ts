@@ -13,12 +13,15 @@ import { FormaPagamentoComponent } from './components/forma-pagamento.component'
 import { CurrencyCustomPipe } from "../shared/components/currency-custom.pipe";
 import { CurrencyFormatterDirective } from "../shared/components/currency-formatter.directive";
 
+import { TranslateDirective } from "../shared/components/translate.directive";
+
 @NgModule({
   declarations: [
     MatriculaFormComponent,
     FormaPagamentoComponent,
     CurrencyFormatterDirective,
-    CurrencyCustomPipe
+    CurrencyCustomPipe,
+    TranslateDirective
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { CurrencyFormatterDirective } from "../shared/components/currency-format
     MaterializeModule
   ],
   exports: [
-    MaterializeDirective
+    MaterializeDirective,
+    TranslateDirective
   ],
   providers: [
     MatriculaService,

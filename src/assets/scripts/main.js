@@ -3,8 +3,7 @@
 $.i18n.properties({
     name: 'messages',
     path: 'assets/bundles/',
-    mode: 'map',
-    cache: true,
+    mode: 'both',
     language: 'pt_BR'
 });
 

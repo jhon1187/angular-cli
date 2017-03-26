@@ -7,7 +7,7 @@
     <p *ngFor="let formaPagamento of formasPagamento">
       <input name="formaPagamentoGrupo" type="radio" id="formaPagamento_{{formaPagamento.id}}" [(ngModel)]="model.tipoPagamento"
         value="{{formaPagamento.tipo}}" (ngModelChange)="formaPagamentoAlterado()" />
-      <label for="formaPagamento_{{formaPagamento.id}}">{{TipoFormaPagamento[formaPagamento.tipo]}}</label>
+      <label for="formaPagamento_{{formaPagamento.id}}" translate>{{TipoFormaPagamento[formaPagamento.tipo]}}</label>
     </p>
   </div>
 
