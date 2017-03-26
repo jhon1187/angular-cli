@@ -4,8 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
-import { MaterializeModule } from 'angular2-materialize';
-import { MaterializeDirective } from 'angular2-materialize';
+import { MaterializeModule, MaterializeDirective } from 'angular2-materialize';
 
 import { MatriculaService } from './matricula.service';
 import { MatriculaFormComponent } from './pages/matricula-form.component';

@@ -11,6 +11,8 @@ import { MatriculaService } from '../matricula.service';
 import { FormaPagamentoForm } from "app/matricula/components/entities/forma-pagemento-form";
 import { Matricula } from "app/matricula/entities/matricula";
 
+declare var Materialize: any;
+
 @Component({
   selector: 'app-matricula-form',
   templateUrl: './matricula-form.component.html',
@@ -22,8 +24,9 @@ export class MatriculaFormComponent implements OnInit {
 
   model: MatriculaForm = new MatriculaForm();
 
-  turmasAutoComplete: any = {};
   turmas: Turma[] = [];
+  turmasAutoComplete: any = {};
+  turmaSelecionada: string = null;
 
   constructor(
     formBuilder: FormBuilder,
@@ -82,46 +85,52 @@ export class MatriculaFormComponent implements OnInit {
   }
 
   turmaAlterada() {
+    this.model.turma = null;
     this.model.valorTotal = null;
-    this.model.turma.formasPagamento = null;
     this.model.formaPagamentoForm = null;
 
-    if (!this.model.turma || this.model.turma.nome == null || this.model.turma.nome.trim() == "") {
+    if (this.turmaSelecionada == null || this.turmaSelecionada.trim() == "") {
       return;
     }
 
-    let turmaSelectedSplit: string[] = this.model.turma.nome.split("-");
+    let turmaSelectedSplit: string[] = this.turmaSelecionada.split("-");
     let idTurma = turmaSelectedSplit[0].trim();
 
     if (idTurma == null || idTurma == "") {
       return;
     }
 
-    let turma = this.turmas.find(turma => {
+    this.model.turma = this.turmas.find(turma => {
       return (turma.id == idTurma);
     });
 
-    if (!turma) {
-      return;
+    if (!this.model.turma) {
+      return null;
     }
 
-    this.model.valorTotal = (turma.valor / 100);
-    this.model.turma.formasPagamento = turma.formasPagamento;
+    this.model.valorTotal = (this.model.turma.valor / 100);
     this.model.formaPagamentoForm = new FormaPagamentoForm();
   }
 
   save() {
-    let matricula: Matricula = new Matricula(),
-      result: any = null;
+    let matricula: Matricula = new Matricula();
 
+    matricula.turmaId = this.model.turma.id;
     matricula.alunoId = this.model.aluno.id;
     matricula.formaPagamento = this.model.formaPagamentoForm.tipoPagamento;
     matricula.quantidadeParcelas = this.model.formaPagamentoForm.parcela.quantidade;
-    matricula.turmaId = this.model.turma.id;
 
-    console.info(matricula);
-
-    result = this.matriculaService.addMatricula(matricula);
-    result.subscribe(data => this.router.navigate(['matricula/form']));
+    this.matriculaService.addMatricula(matricula).subscribe(
+      data => {
+        this.router.navigate(['matricula/form'])
+      },
+      response => {
+        if (response.status == "200") {
+          Materialize.toast('Matricula realizada com sucesso!');
+        } else {
+          Materialize.toast('Houve um erro ao tentar realizar a Matricula!');
+        }
+      }
+    );
   }
 }
