@@ -18,7 +18,6 @@ import { Matricula } from "app/matricula/entities/matricula";
   styleUrls: ['./matricula-form.component.css']
 })
 export class MatriculaFormComponent implements OnInit {
-
   form: FormGroup;
   title: string = null;
 
@@ -85,17 +84,18 @@ export class MatriculaFormComponent implements OnInit {
   }
 
   turmaAlterada() {
+    this.model.valorTotal = null;
+    this.model.turma.formasPagamento = null;
+    this.model.formaPagamentoForm = null;
 
-    if (!this.model.turma || !this.model.turma.nome || this.model.turma.nome.trim() == "") {
-      this.model.valorTotal = null;
+    if (!this.model.turma || this.model.turma.nome == null || this.model.turma.nome.trim() == "") {
       return;
     }
 
     let turmaSelectedSplit: string[] = this.model.turma.nome.split("-");
     let idTurma = turmaSelectedSplit[0].trim();
 
-    if (idTurma || idTurma == "") {
-      this.model.valorTotal = null;
+    if (idTurma == null || idTurma == "") {
       return;
     }
 
@@ -103,14 +103,18 @@ export class MatriculaFormComponent implements OnInit {
       return (turma.id == idTurma);
     });
 
+    if (!turma) {
+      return;
+    }
+
     this.model.valorTotal = (turma.valor / 100);
     this.model.turma.formasPagamento = turma.formasPagamento;
     this.model.formaPagamentoForm = new FormaPagamentoForm();
   }
 
   save() {
-    let matricula : Matricula = new Matricula(),
-    result : any = null;
+    let matricula: Matricula = new Matricula(),
+      result: any = null;
 
     matricula.alunoId = this.model.aluno.id;
     matricula.formaPagamento = this.model.formaPagamentoForm.tipoPagamento;
