@@ -14,7 +14,7 @@
   <div class="separador" *ngIf="model.tipoPagamento == 1">
     <div class="row">
       <div class="input-field col s12">
-        <input id="nomeCartao" name="nomeCartao" type="text" [(ngModel)]="model.cartao.nome">
+        <input id="nomeCartao" name="nomeCartao" maxlength="60" type="text" [(ngModel)]="model.cartao.nome">
         <label for="nomeCartao" [class.active]="model.cartao.nome">Nome Impresso no Cartão</label>
       </div>
     </div>
@@ -26,7 +26,7 @@
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input id="codigoCartao" name="codigoCartao" type="text" [(ngModel)]="model.cartao.codigo">
+        <input id="codigoCartao" name="codigoCartao" max="999" onKeyUp="if(this.value.length > 3){this.value = this.value.substr(0, 3);}" type="number" [(ngModel)]="model.cartao.codigo">
         <label for="codigoCartao" [class.active]="model.cartao.codigo">Código de Segurança</label>
       </div>
     </div>

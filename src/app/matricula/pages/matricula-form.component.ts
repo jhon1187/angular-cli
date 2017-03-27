@@ -71,6 +71,10 @@ export class MatriculaFormComponent implements OnInit {
     });
   }
 
+  matriculaRealizada() {
+    return (this.model.matriculaId != null && this.model.matriculaId != "");
+  }
+
   gerarTurmasAutoComplete() {
     let autoCompleteObj = {};
 
@@ -112,19 +116,17 @@ export class MatriculaFormComponent implements OnInit {
     this.model.formaPagamentoForm = new FormaPagamentoForm();
   }
 
-  save() {
+  matricular() {
     let matricula: Matricula = new Matricula();
 
     matricula.turmaId = this.model.turma.id;
     matricula.alunoId = this.model.aluno.id;
-    matricula.formaPagamento = this.model.formaPagamentoForm.tipoPagamento;
-    matricula.quantidadeParcelas = this.model.formaPagamentoForm.parcela.quantidade;
 
     this.matriculaService.addMatricula(matricula).subscribe(
       data => {
         Materialize.toast('Matrícula realizada com sucesso!', 4000);
-
-        this.router.navigate(['matricula/form'])
+        this.model.matriculaId = data.matriculaId;
+        // this.router.navigate(['matricula/form']);
       },
       response => {
         if (response.status != "200") {
@@ -135,5 +137,14 @@ export class MatriculaFormComponent implements OnInit {
         }
       }
     );
+  }
+
+  efetuarPagemento() {
+    let matricula: Matricula = new Matricula();
+
+    matricula.formaPagamento = this.model.formaPagamentoForm.tipoPagamento;
+    matricula.quantidadeParcelas = this.model.formaPagamentoForm.parcela.quantidade;
+
+    console.info(matricula);
   }
 }
