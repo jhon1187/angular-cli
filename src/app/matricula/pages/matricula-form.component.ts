@@ -58,7 +58,7 @@ export class MatriculaFormComponent implements OnInit {
     this.route.params.subscribe(params => {
       var alunoId = params['alunoId'];
 
-      this.title = 'Nova Matricula';
+      this.title = 'Nova Matrícula';
 
       this.matriculaService.getAluno(alunoId).subscribe(aluno => this.model.aluno = aluno);
 
@@ -126,9 +126,9 @@ export class MatriculaFormComponent implements OnInit {
       },
       response => {
         if (response.status == "200") {
-          Materialize.toast('Matricula realizada com sucesso!');
+          Materialize.toast('Matrícula realizada com sucesso!');
         } else {
-          Materialize.toast('Houve um erro ao tentar realizar a Matricula!');
+          Materialize.toast('Houve um erro ao tentar realizar a Matrícula!');
         }
       }
     );
