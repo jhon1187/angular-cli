@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Aluno } from '../entities/aluno';
-import { Turma } from '../entities/turma';
+import { Aluno } from '../objects/aluno';
+import { Turma } from '../objects/turma';
 
-import { MatriculaForm } from '../entities/matricula-form';
+import { MatriculaForm } from '../objects/matricula-form';
 
 import { MatriculaService } from '../matricula.service';
-import { FormaPagamentoForm } from "app/matricula/components/entities/forma-pagemento-form";
-import { Matricula } from "app/matricula/entities/matricula";
+import { FormaPagamentoForm } from "app/matricula/components/objects/forma-pagemento-form";
+import { Matricula } from "app/matricula/objects/matricula";
 
 declare var Materialize: any;
 
@@ -75,7 +75,7 @@ export class MatriculaFormComponent implements OnInit {
     let autoCompleteObj = {};
 
     this.turmas.forEach(turma => {
-      let valorAutoComplete: string = turma.id + " - " + turma.nome;
+      let valorAutoComplete: string = turma.id + " | " + turma.nome;
       let iconeAutoComplete: string = null;
 
       autoCompleteObj[valorAutoComplete] = iconeAutoComplete;
@@ -93,7 +93,7 @@ export class MatriculaFormComponent implements OnInit {
       return;
     }
 
-    let turmaSelectedSplit: string[] = this.turmaSelecionada.split("-");
+    let turmaSelectedSplit: string[] = this.turmaSelecionada.split("|");
     let idTurma = turmaSelectedSplit[0].trim();
 
     if (idTurma == null || idTurma == "") {
@@ -122,13 +122,16 @@ export class MatriculaFormComponent implements OnInit {
 
     this.matriculaService.addMatricula(matricula).subscribe(
       data => {
+        Materialize.toast('Matrícula realizada com sucesso!', 4000);
+
         this.router.navigate(['matricula/form'])
       },
       response => {
-        if (response.status == "200") {
-          Materialize.toast('Matrícula realizada com sucesso!');
-        } else {
-          Materialize.toast('Houve um erro ao tentar realizar a Matrícula!');
+        if (response.status != "200") {
+          let content: any[] = JSON.parse(response._body);
+          content.forEach(data => {
+            Materialize.toast(data.value, 4000);
+          });
         }
       }
     );

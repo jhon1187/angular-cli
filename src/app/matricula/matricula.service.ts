@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
-import { Matricula } from "app/matricula/entities/matricula";
-import { MatriculaForm } from "app/matricula/entities/matricula-form";
+import { Matricula } from "app/matricula/objects/matricula";
 
 @Injectable()
 export class MatriculaService {
 
-  private url: string = "http://jsonplaceholder.typicode.com/sig/matricula";
+  private url: string = "http://dr-25023/Sig/api/matriculas";
   private urlAluno: string = "http://demo7540274.mockable.io/aluno";
   private urlTurmas: string = "http://demo7540274.mockable.io/turmas";
 
-  constructor(private http: Http) { }
+  headers = new Headers();
+
+  constructor(private http: Http) {
+    this.headers.append('Content-Type', 'application/json');
+  }
 
   getAluno(id) {
     return this.http.get(this.urlAluno)
@@ -27,8 +30,8 @@ export class MatriculaService {
       .map(res => res.json());
   }
 
-  addMatricula(matricula : Matricula) {
-    return this.http.post(this.url, JSON.stringify(matricula))
+  addMatricula(matricula: Matricula) {
+    return this.http.post(this.url, JSON.stringify(matricula), { headers: this.headers })
       .map(res => res.json());
   }
 

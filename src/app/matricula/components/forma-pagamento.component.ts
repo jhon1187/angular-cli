@@ -1,9 +1,9 @@
-import { TipoFormaPagamento } from 'app/matricula/components/entities/tipo-forma-pagamento';
-import { Parcela } from './entities/parcela';
+import { TipoFormaPagamento } from 'app/matricula/components/objects/tipo-forma-pagamento';
+import { Parcela } from './objects/parcela';
 import { Component, Input, Output } from '@angular/core';
-import { FormaPagamento } from './entities/forma-pagamento';
-import { FormaPagamentoForm } from './entities/forma-pagemento-form';
-import { Cartao } from './entities/cartao';
+import { FormaPagamento } from './objects/forma-pagamento';
+import { FormaPagamentoForm } from './objects/forma-pagemento-form';
+import { Cartao } from './objects/cartao';
 
 @Component({
   selector: 'forma-pagamento',
