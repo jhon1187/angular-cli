@@ -1,11 +1,11 @@
 import { Directive, HostListener, ElementRef, OnInit } from "@angular/core";
 
-import $ from "jquery";
+declare var $: any;
 
 @Directive({ selector: "[translate]" })
 export class TranslateDirective implements OnInit {
 
-    private el: HTMLLabelElement;
+    private el: HTMLInputElement;
 
     constructor(
         private elementRef: ElementRef
@@ -13,17 +13,26 @@ export class TranslateDirective implements OnInit {
         this.el = this.elementRef.nativeElement;
     }
 
+    private translate(text) {
+        return $.i18n.prop(text);
+    }
+
     ngOnInit() {
-        this.el.textContent;
-        
+        if (this.el.textContent) {
+            this.el.textContent = this.translate(this.el.textContent);
+        }
+    }
 
-    //    console.info($.i18n.prop("BOLETO"));
+    // ngAfterViewChecked() {
+    //     if (this.el.textContent) {
+    //         this.el.textContent = this.translate(this.el.textContent);
+    //     }
+    // }
 
-    console.info($.i18n);
-
-        // if (this.el.textContent) {
-        //     this.el.textContent = i18n(this.el.textContent);
-        // }
+    ngAfterViewInit() {
+        if (this.el.textContent) {
+            this.el.textContent = this.translate(this.el.textContent);
+        }
     }
 
 }
