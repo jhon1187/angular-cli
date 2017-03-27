@@ -20,7 +20,7 @@
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input id="numeroCartao" name="numeroCartao" type="text" [(ngModel)]="model.cartao.numero">
+        <input id="numeroCartao" cardNumberFormatter name="numeroCartao" type="text" [(ngModel)]="model.cartao.numero">
         <label for="numeroCartao" [class.active]="model.cartao.numero">Número do Cartão</label>
       </div>
     </div>

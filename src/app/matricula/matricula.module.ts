@@ -13,6 +13,8 @@ import { FormaPagamentoComponent } from './components/forma-pagamento.component'
 import { TranslateDirective } from "../shared/components/translate.directive";
 import { NumberFormatterDirective } from "app/shared/components/number-formatter.directive";
 import { NumberCustomPipe } from "app/shared/components/number-custom.pipe";
+import { CardNumberFormatterDirective } from "app/shared/components/card-number-formatter.directive";
+import { CardNumberCustomPipe } from "app/shared/components/card-number-custom.pipe";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NumberCustomPipe } from "app/shared/components/number-custom.pipe";
     FormaPagamentoComponent,
     TranslateDirective,
     NumberFormatterDirective,
-    NumberCustomPipe
+    NumberCustomPipe,
+    CardNumberFormatterDirective,
+    CardNumberCustomPipe
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,8 @@ import { NumberCustomPipe } from "app/shared/components/number-custom.pipe";
   ],
   providers: [
     MatriculaService,
-    NumberCustomPipe
+    NumberCustomPipe,
+    CardNumberCustomPipe
   ]
 })
 export class MatriculaModule { }

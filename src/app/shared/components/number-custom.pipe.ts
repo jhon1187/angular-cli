@@ -1,7 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-const PADDING = "000000";
-
 @Pipe({ name: "number-custom" })
 export class NumberCustomPipe implements PipeTransform {
   constructor() { }
@@ -12,7 +10,7 @@ export class NumberCustomPipe implements PipeTransform {
       value = String(value);
     }
 
-    if(value.length > maxSize){value = value.substr(0, maxSize);}
+    if (value.length > maxSize) { value = value.substr(0, maxSize); }
 
     return value;
   }

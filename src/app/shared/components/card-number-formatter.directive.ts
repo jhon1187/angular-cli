@@ -1,30 +1,28 @@
 import { Directive, HostListener, ElementRef, OnInit, Input } from "@angular/core";
-import { NumberCustomPipe } from "./number-custom.pipe";
+import { CardNumberCustomPipe } from "./card-number-custom.pipe";
 
-@Directive({ selector: "[numberFormatter]" })
-export class NumberFormatterDirective implements OnInit {
+@Directive({ selector: "[cardNumberFormatter]" })
+export class CardNumberFormatterDirective implements OnInit {
 
     private el: HTMLInputElement;
 
-    @Input() maxsize: number;
-
     constructor(
         private elementRef: ElementRef,
-        private customPipe: NumberCustomPipe
+        private customPipe: CardNumberCustomPipe
     ) {
         this.el = this.elementRef.nativeElement;
     }
 
     ngOnInit() {
         if (this.el.value) {
-            this.el.value = this.customPipe.transform(this.el.value, this.maxsize);
+            this.el.value = this.customPipe.transform(this.el.value);
         }
     }
 
     @HostListener('keyup', ['$event'])
-    keyboardInput(value) {
+    keyboardInput(event) {
         if (this.el.value) {
-            this.el.value = this.customPipe.transform(this.el.value, this.maxsize);
+            this.el.value = this.customPipe.transform(this.el.value);
         }
     }
 
