@@ -10,18 +10,17 @@ import { MatriculaService } from './matricula.service';
 import { MatriculaFormComponent } from './pages/matricula-form.component';
 import { FormaPagamentoComponent } from './components/forma-pagamento.component';
 
-import { CurrencyCustomPipe } from "../shared/components/currency-custom.pipe";
-import { CurrencyFormatterDirective } from "../shared/components/currency-formatter.directive";
-
 import { TranslateDirective } from "../shared/components/translate.directive";
+import { NumberFormatterDirective } from "app/shared/components/number-formatter.directive";
+import { NumberCustomPipe } from "app/shared/components/number-custom.pipe";
 
 @NgModule({
   declarations: [
     MatriculaFormComponent,
     FormaPagamentoComponent,
-    CurrencyFormatterDirective,
-    CurrencyCustomPipe,
-    TranslateDirective
+    TranslateDirective,
+    NumberFormatterDirective,
+    NumberCustomPipe
   ],
   imports: [
     CommonModule,
@@ -37,7 +36,7 @@ import { TranslateDirective } from "../shared/components/translate.directive";
   ],
   providers: [
     MatriculaService,
-    CurrencyCustomPipe
+    NumberCustomPipe
   ]
 })
 export class MatriculaModule { }
