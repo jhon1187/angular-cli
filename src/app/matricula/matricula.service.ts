@@ -13,6 +13,7 @@ export class MatriculaService {
   private url: string = "http://dr-25023/Sig/api/matriculas";
   private urlAluno: string = "http://demo7540274.mockable.io/aluno";
   private urlTurmas: string = "http://demo7540274.mockable.io/turmas";
+  private urlEfetuarPagamento: string = "http://demo7540274.mockable.io/efetuar-pagamento";
 
   headers = new Headers();
 
@@ -32,6 +33,11 @@ export class MatriculaService {
 
   addMatricula(matricula: Matricula) {
     return this.http.post(this.url, JSON.stringify(matricula), { headers: this.headers })
+      .map(res => res.json());
+  }
+
+  efetuarPagamento(matricula: Matricula) {
+    return this.http.post(this.urlEfetuarPagamento, JSON.stringify(matricula), { headers: this.headers })
       .map(res => res.json());
   }
 

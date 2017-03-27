@@ -126,7 +126,6 @@ export class MatriculaFormComponent implements OnInit {
       data => {
         Materialize.toast('Matrícula realizada com sucesso!', 4000);
         this.model.matriculaId = data.matriculaId;
-        // this.router.navigate(['matricula/form']);
       },
       response => {
         if (response.status != "200") {
@@ -144,7 +143,19 @@ export class MatriculaFormComponent implements OnInit {
 
     matricula.formaPagamento = this.model.formaPagamentoForm.tipoPagamento;
     matricula.quantidadeParcelas = this.model.formaPagamentoForm.parcela.quantidade;
+    matricula.cartao = this.model.formaPagamentoForm.cartao;
 
-    console.info(matricula);
+    this.matriculaService.efetuarPagamento(matricula).subscribe(
+      data => {
+        Materialize.toast('Pagamento Efetuado com sucesso!', 4000);
+        this.model.matriculaId = data.matriculaId;
+        this.router.navigate(['']);
+      },
+      response => {
+        if (response.status != "200") {
+          Materialize.toast('Erro ao Efetuar Pagamento!', 4000);
+        }
+      }
+    );
   }
 }
