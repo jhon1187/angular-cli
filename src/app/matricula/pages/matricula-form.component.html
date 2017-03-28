@@ -9,7 +9,7 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">recent_actors</i>
-          <input id="turma" name="turma" type="text" class="validate" formControlName="turma" [(ngModel)]="turmaSelecionada" (ngModelChange)="turmaAlterada()"
+          <input id="turma" name="turma" type="text" class="validate" required formControlName="turma" [(ngModel)]="turmaSelecionada" (ngModelChange)="turmaAlterada()"
           materialize="autocomplete" [materializeParams]="[{'data': turmasAutoComplete }]">
           <label for="turma" [class.active]="turmaSelecionada">Turma *</label>
         </div>
@@ -18,7 +18,7 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">account_circle</i>
-          <input id="aluno" name="aluno" type="text" disabled="disabled" class="validate" formControlName="aluno" [ngModel]="model.aluno?.nome">
+          <input id="aluno" name="aluno" type="text" disabled="disabled" class="validate" required formControlName="aluno" [ngModel]="model.aluno?.nome">
           <label for="aluno" [class.active]="model.aluno?.nome">Aluno *</label>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">payment</i>
-          <input id="valorTotal" name="valorTotal" type="text" class="validate" formControlName="valorTotal" disabled="disabled" [ngModel]="model.valorTotal | currency:'BRL':true">
+          <input id="valorTotal" name="valorTotal" type="text" class="validate" required formControlName="valorTotal" disabled="disabled" [ngModel]="model.valorTotal | currency:'BRL':true">
           <label for="valorTotal" [class.active]="model.valorTotal">Valor Total *</label>
         </div>
       </div>
