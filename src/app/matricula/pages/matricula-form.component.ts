@@ -148,7 +148,6 @@ export class MatriculaFormComponent implements OnInit {
     this.matriculaService.efetuarPagamento(matricula).subscribe(
       data => {
         Materialize.toast('Pagamento Efetuado com sucesso!', 4000);
-        this.model.matriculaId = data.matriculaId;
         this.router.navigate(['']);
       },
       response => {
