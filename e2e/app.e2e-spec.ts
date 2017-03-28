@@ -1,10 +1,10 @@
-import { SIGWEBPage } from './app.po';
+import { AngularCliNewPage } from './app.po';
 
-describe('sig-web App', () => {
-  let page: SIGWEBPage;
+describe('angular-cli-new App', () => {
+  let page: AngularCliNewPage;
 
   beforeEach(() => {
-    page = new SIGWEBPage();
+    page = new AngularCliNewPage();
   });
 
   it('should display message saying app works', () => {

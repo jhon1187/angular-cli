@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class SIGWEBPage {
+export class AngularCliNewPage {
   navigateTo() {
     return browser.get('/');
   }
