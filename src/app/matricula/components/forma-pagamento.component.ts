@@ -1,6 +1,8 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { TipoFormaPagamento } from 'app/matricula/components/objects/tipo-forma-pagamento';
 import { Parcela } from './objects/parcela';
-import { Component, Input, Output } from '@angular/core';
 import { FormaPagamento } from './objects/forma-pagamento';
 import { FormaPagamentoForm } from './objects/forma-pagemento-form';
 import { Cartao } from './objects/cartao';
@@ -16,13 +18,35 @@ export class FormaPagamentoComponent {
   @Input("formasPagamento") formasPagamento: FormaPagamento[];
   @Input("valorTotal") valorTotal: number;
 
+  @Output("formGroupUpdated") formGroupUpdated = new EventEmitter();
+
+  formGroup: FormGroup;
+
   parcelas: Parcela[] = [];
 
   TipoFormaPagamento: typeof TipoFormaPagamento = TipoFormaPagamento;
 
-  constructor() { }
+  constructor(
+    formBuilder: FormBuilder,
+  ) {
+    this.formGroup = formBuilder.group({
+      formaPagamento: ['', Validators.required],
+      nomeCartao: [],
+      numeroCartao: ['', Validators.required],
+      codigoCartao: ['', Validators.required],
+      validadeCartao: ['', Validators.required],
+      parcela: ['', Validators.required],
+    });
+
+    this.formGroupUpdated.emit(this.formGroup);
+  }
 
   formaPagamentoAlterado() {
+
+    if (!this.model.tipoPagamento) {
+      return;
+    }
+
     this.model.parcela = new Parcela();
     this.model.cartao = new Cartao();
 

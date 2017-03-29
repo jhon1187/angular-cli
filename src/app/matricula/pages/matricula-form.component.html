@@ -4,7 +4,7 @@
   </div>
 
   <div class="row">
-    <form materialize class="col s12" [formGroup]="form" (ngSubmit)="matricular()">
+    <form materialize class="col s12" [formGroup]="form.matricula" (ngSubmit)="matricular()">
       
       <div class="row">
         <div class="input-field col s12">
@@ -31,20 +31,19 @@
         </div>
       </div>
 
-      <forma-pagamento [(model)]="model.formaPagamentoForm" [formasPagamento]="model.turma.formasPagamento" [valorTotal]="model.valorTotal" *ngIf="matriculaRealizada()"></forma-pagamento>
+      <forma-pagamento (formGroupUpdated)="formGroupUpdated($event);" [(model)]="model.formaPagamentoForm" [formasPagamento]="model.turma.formasPagamento" [valorTotal]="model.valorTotal" *ngIf="matriculaRealizada()"></forma-pagamento>
 
       <div class="buttons right">
         <button class="btn waves-effect waves-light" onclick="history.go(-1)" type="button">
             Voltar
         </button>
-        <button *ngIf="!matriculaRealizada()" class="btn waves-effect waves-light" type="submit" [disabled]="!form.valid">
+        <button *ngIf="!matriculaRealizada()" class="btn waves-effect waves-light" type="submit" [disabled]="!form.matricula.valid">
             Matricular<i class="material-icons right">send</i>
         </button>
-        <button *ngIf="matriculaRealizada()" class="btn waves-effect waves-light" type="button" (click)="efetuarPagemento()" [disabled]="!form.valid">
+        <button *ngIf="matriculaRealizada()" class="btn waves-effect waves-light" type="button" (click)="efetuarPagamento()" [disabled]="!form.formaPagamento.valid">
             Efetuar Pagamento<i class="material-icons right">send</i>
         </button>
       </div>
-
     </form>
   </div>
 </div>

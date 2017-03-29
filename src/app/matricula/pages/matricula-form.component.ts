@@ -19,7 +19,7 @@ declare var Materialize: any;
   styleUrls: ['./matricula-form.component.css']
 })
 export class MatriculaFormComponent implements OnInit {
-  form: FormGroup;
+  form: any;
   title: string = null;
 
   model: MatriculaForm = new MatriculaForm();
@@ -34,24 +34,21 @@ export class MatriculaFormComponent implements OnInit {
     private route: ActivatedRoute,
     private matriculaService: MatriculaService,
   ) {
-    this.form = formBuilder.group({
-      turma: ['', [
-        Validators.required,
-        Validators.minLength(3)
-      ]],
-      aluno: ['', [
-        Validators.required
-      ]],
-      valorTotal: ['', [
-        Validators.required
-      ]]
-      // , address: formBuilder.group({
-      //   street: ['', Validators.minLength(3)],
-      //   suite: [],
-      //   city: ['', Validators.maxLength(30)],
-      //   zipcode: ['', Validators.pattern('^([0-9]){5}([-])([0-9]){4}$')]
-      // })
-    });
+    this.form = {
+      matricula: formBuilder.group({
+        turma: ['', [
+          Validators.required,
+          Validators.minLength(3)
+        ]],
+        aluno: ['', [
+          Validators.required
+        ]],
+        valorTotal: ['', [
+          Validators.required
+        ]]
+      }),
+      formaPagamento: formBuilder.group({})
+    };
   }
 
   ngOnInit() {
@@ -109,7 +106,7 @@ export class MatriculaFormComponent implements OnInit {
     });
 
     if (!this.model.turma) {
-      return null;
+      return;
     }
 
     this.model.valorTotal = (this.model.turma.valor / 100);
@@ -124,21 +121,25 @@ export class MatriculaFormComponent implements OnInit {
 
     this.matriculaService.addMatricula(matricula).subscribe(
       data => {
-        Materialize.toast('Matrícula realizada com sucesso!', 4000);
+        Materialize.toast('Matrícula liberada para pagamento! <br> Por favor selecione a forma de pagamento desejada.', 10000);
         this.model.matriculaId = data.matriculaId;
       },
       response => {
         if (response.status != "200") {
           let content: any[] = JSON.parse(response._body);
           content.forEach(data => {
-            Materialize.toast(data.value, 4000);
+            Materialize.toast(data.value, 10000);
           });
         }
       }
     );
   }
 
-  efetuarPagemento() {
+  formGroupUpdated(formaPagamentoFormGroup) {
+    this.form.formaPagamento = formaPagamentoFormGroup;
+  }
+
+  efetuarPagamento() {
     let matricula: Matricula = new Matricula();
 
     matricula.formaPagamento = this.model.formaPagamentoForm.tipoPagamento;
@@ -147,12 +148,12 @@ export class MatriculaFormComponent implements OnInit {
 
     this.matriculaService.efetuarPagamento(matricula).subscribe(
       data => {
-        Materialize.toast('Pagamento Efetuado com sucesso!', 4000);
+        Materialize.toast('Pagamento Efetuado com sucesso!', 10000);
         this.router.navigate(['']);
       },
       response => {
         if (response.status != "200") {
-          Materialize.toast('Erro ao Efetuar Pagamento!', 4000);
+          Materialize.toast('Erro ao Efetuar Pagamento!', 10000);
         }
       }
     );

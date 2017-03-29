@@ -1,11 +1,11 @@
-<div class="card-panel">
+<div class="card-panel" [formGroup]="formGroup">
   <div class="title">
     <span> Forma de Pagamento: *</span>
   </div>
 
   <div>
     <p *ngFor="let formaPagamento of formasPagamento">
-      <input name="formaPagamentoGrupo" type="radio" required id="formaPagamento_{{formaPagamento.id}}" [(ngModel)]="model.tipoPagamento"
+      <input name="formaPagamento" type="radio" required formControlName="formaPagamento" id="formaPagamento_{{formaPagamento.id}}" [(ngModel)]="model.tipoPagamento"
         value="{{formaPagamento.tipo}}" (ngModelChange)="formaPagamentoAlterado()" />
       <label for="formaPagamento_{{formaPagamento.id}}" translate>{{TipoFormaPagamento[formaPagamento.tipo]}}</label>
     </p>
@@ -14,25 +14,25 @@
   <div class="separador" *ngIf="model.tipoPagamento == 1">
     <div class="row">
       <div class="input-field col s12">
-        <input id="nomeCartao" name="nomeCartao" required maxlength="60" type="text" [(ngModel)]="model.cartao.nome">
+        <input id="nomeCartao" name="nomeCartao" required maxlength="60" formControlName="nomeCartao" type="text" [(ngModel)]="model.cartao.nome">
         <label for="nomeCartao" [class.active]="model.cartao.nome">Nome Impresso no Cartão *</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input id="numeroCartao" cardNumberFormatter required name="numeroCartao" type="text" [(ngModel)]="model.cartao.numero">
+        <input id="numeroCartao" cardNumberFormatter required formControlName="numeroCartao" name="numeroCartao" type="text" [(ngModel)]="model.cartao.numero">
         <label for="numeroCartao" [class.active]="model.cartao.numero">Número do Cartão *</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input id="codigoCartao" name="codigoCartao" max="999" required numberFormatter [maxsize]="3" type="number" [(ngModel)]="model.cartao.codigo">
+        <input id="codigoCartao" name="codigoCartao" max="999" required formControlName="codigoCartao" numberFormatter [maxsize]="3" type="number" [(ngModel)]="model.cartao.codigo">
         <label for="codigoCartao" [class.active]="model.cartao.codigo">Código de Segurança *</label>
       </div>
     </div>
      <div class="row">
       <div class="input-field col s12">
-        <input id="validadeCartao" name="validadeCartao" type="text" required materialize="pickadate" [materializeParams]="[{'format':'mm/yy'}]" [(ngModel)]="model.cartao.validade">
+        <input id="validadeCartao" name="validadeCartao" type="text" required formControlName="validadeCartao" materialize="pickadate" [materializeParams]="[{'format':'mm/yy'}]" [(ngModel)]="model.cartao.validade">
         <label for="validadeCartao" [class.active]="model.cartao.validade">Validade *</label>
       </div>
     </div>
@@ -42,7 +42,7 @@
     <span>Parcelas: *</span>
 
     <p *ngFor="let parcela of parcelas">
-      <input name="parcelaGrupo" type="radio" id="parcela_{{parcela.quantidade}}" required [(ngModel)]="model.parcela.quantidade" value="{{parcela.quantidade}}"
+      <input name="parcela" type="radio" id="parcela_{{parcela.quantidade}}" required formControlName="parcela" [(ngModel)]="model.parcela.quantidade" value="{{parcela.quantidade}}"
       />
       <label for="parcela_{{parcela.quantidade}}">{{parcela.quantidade}}x {{parcela.valor | currency:'BRL':true}}</label>
     </p>
